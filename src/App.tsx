@@ -49,15 +49,20 @@ function App() {
   const [encrypted, setEncrypted] = useState('')
   const [decrypted, setDecrypted] = useState('')
   const [decryptedText, setDecryptedText] = useState('')
+  const [loading, setLoading] = useState(false)
 
 const handleOperation = ()=>{
   const des = new DES(key);
   const obj = testDES(des, text)
-  setBinaryInput(obj.binaryInput)
-  setPadded(obj.padded)
-  setEncrypted(obj.encrypted)
-  setDecrypted(obj.decrypted)
-  setDecryptedText(obj.decryptedText)
+  setLoading(true)
+  setTimeout(()=>{
+    setLoading(false)
+    setBinaryInput(obj.binaryInput)
+    setPadded(obj.padded)
+    setEncrypted(obj.encrypted)
+    setDecrypted(obj.decrypted)
+    setDecryptedText(obj.decryptedText)
+  }, 3000)
 }
 
   return (
@@ -105,11 +110,13 @@ const handleOperation = ()=>{
         <button onClick={handleOperation} style={{ marginTop: '10px', textAlign: 'center'}}>
           {mode === 'encrypt' ? 'Encrypt' : 'Decrypt'}
         </button>
-        <div className="loader">
-            <svg width="100" height="100" viewBox="0 0 100 100">
-                <circle className="circle" cx="50" cy="50" r="40"></circle>
-            </svg>
-        </div>
+        {loading&&
+          <div className="loader">
+              <svg width="50" height="50" viewBox="0 0 50 50">
+                  <circle className="circle" cx="25" cy="25" r="20"></circle>
+              </svg>
+          </div>
+        }
         <div>
           <h3>ውፅኢታት: </h3>
           {binaryInput&&<p>Text in binary: {binaryInput}</p>}
