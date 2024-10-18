@@ -120,10 +120,10 @@ const handleOperation = ()=>{
         <div>
           <h3>ውፅኢታት: </h3>
           {binaryInput&&<p>Text in binary: {binaryInput}</p>}
-          {padded&&<p>Text in binary: {padded}</p>}
-          {encrypted&&<p>Text in binary: {encrypted}</p>}
-          {decrypted&&<p>Text in binary: {decrypted}</p>}
-          {decryptedText&&<p>Text in binary: {decryptedText}</p>}
+          {padded&&<p>Padded blocks: {padded}</p>}
+          {encrypted&&<p>Encrypted: {encrypted}</p>}
+          {decrypted&&<p>Decrypted: {decrypted}</p>}
+          {decryptedText&&<p>Decrypted text: {decryptedText}</p>}
         </div>
       </div>
     </>
