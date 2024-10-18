@@ -39,22 +39,31 @@ function binaryToString(binary: string): string {
 //     .map((nibble) => parseInt(nibble, 2).toString(16))
 //     .join('');
 // }
+
 function App() {
   const [mode, setMode] = useState('encrypt')
   const [text, setText] = useState('')
   const [key, setKey] = useState('')
-  const [result, setResult] = useState({})
+  const [binaryInput, setBinaryInput] = useState('')
+  const [padded, setPadded] = useState('')
+  const [encrypted, setEncrypted] = useState('')
+  const [decrypted, setDecrypted] = useState('')
+  const [decryptedText, setDecryptedText] = useState('')
 
 const handleOperation = ()=>{
   const des = new DES(key);
   const obj = testDES(des, text)
-  setResult(obj)
+  setBinaryInput(obj.binaryInput)
+  setPadded(obj.padded)
+  setEncrypted(obj.encrypted)
+  setDecrypted(obj.decrypted)
+  setDecryptedText(obj.decryptedText)
 }
 
   return (
     <>
       <div style={{ padding: '20px' }}>
-        <h2>Simple Encryption/Decryption (DES-Like)</h2>
+        <h2 style={{textAlign: 'center'}}>Simple Encryption/Decryption (DES-Like)</h2>
         <div>
           <label>
             <input
@@ -93,19 +102,17 @@ const handleOperation = ()=>{
             style={{ marginTop: '10px', width: '100%' }}
           />
         </div>
-        <button onClick={handleOperation} style={{ marginTop: '10px' }}>
+        <button onClick={handleOperation} style={{ marginTop: '10px', textAlign: 'center'}}>
           {mode === 'encrypt' ? 'Encrypt' : 'Decrypt'}
         </button>
-        {Object.keys(result).length && 
         <div>
           <h3>Results: </h3>
-          {result.binaryInput&&<p>Text in binary: {result.binaryInput}</p>}
-          {result.padded&&<p>Text in binary: {result.padded}</p>}
-          {result.encrypted&&<p>Text in binary: {result.encrypted}</p>}
-          {result.decrypted&&<p>Text in binary: {result.decrypted}</p>}
-          {result.decryptedText&&<p>Text in binary: {result.decryptedText}</p>}
+          {binaryInput&&<p>Text in binary: {binaryInput}</p>}
+          {padded&&<p>Text in binary: {padded}</p>}
+          {encrypted&&<p>Text in binary: {encrypted}</p>}
+          {decrypted&&<p>Text in binary: {decrypted}</p>}
+          {decryptedText&&<p>Text in binary: {decryptedText}</p>}
         </div>
-        }
       </div>
     </>
   )
