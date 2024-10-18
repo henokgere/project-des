@@ -30,6 +30,16 @@
   }
 }
 
+.result{
+  overflow: auto;
+}
+
+::-webkit-scrollbar{
+  width: 1px;
+}
+::-webkit-scrollbar-thumb{
+  width: 1px;
+}
 .logo {
   height: 6em;
   padding: 1.5em;

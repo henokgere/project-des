@@ -117,7 +117,7 @@ const handleOperation = ()=>{
               </svg>
           </div>
         }
-        <div>
+        <div className='result'>
           <h3>ውፅኢታት: </h3>
           {binaryInput&&<p>Text in binary: {binaryInput}</p>}
           {padded&&<p>Padded blocks: {padded}</p>}
