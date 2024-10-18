@@ -18,7 +18,7 @@ function testDES(des: DES, input: string) {
   console.log('Decrypted: ' + decrypted);
   console.log('Decrypted (text): ' + binaryToString(DES.unpadInput(decrypted)));
 
-  return { 'binaryInput': plaintext, 'padded': paddedPlaintext, 'encrypted': encrypted, 'decrypted': decrypted, 'decryptedText': binaryToString(DES.unpadInput(decrypted))}
+  return { 'binaryInput': plaintext, 'padded': paddedPlaintext, 'encrypted': encrypted, 'encryptedText': binaryToString(DES.unpadInput(encrypted)), 'decrypted': decrypted, 'decryptedText': binaryToString(DES.unpadInput(decrypted))}
 }
 
 function stringToBinary(str: string): string {
@@ -47,6 +47,7 @@ function App() {
   const [binaryInput, setBinaryInput] = useState('')
   const [padded, setPadded] = useState('')
   const [encrypted, setEncrypted] = useState('')
+  const [encryptedText, setEncryptedText] = useState('')
   const [decrypted, setDecrypted] = useState('')
   const [decryptedText, setDecryptedText] = useState('')
   const [loading, setLoading] = useState(false)
@@ -60,6 +61,7 @@ const handleOperation = ()=>{
     setBinaryInput(obj.binaryInput)
     setPadded(obj.padded)
     setEncrypted(obj.encrypted)
+    setEncryptedText(obj.encryptedText)
     setDecrypted(obj.decrypted)
     setDecryptedText(obj.decryptedText)
   }, 3000)
@@ -122,6 +124,7 @@ const handleOperation = ()=>{
           {binaryInput&&<p>Text in binary: {binaryInput}</p>}
           {padded&&<p>Padded blocks: {padded}</p>}
           {encrypted&&<p>Encrypted: {encrypted}</p>}
+          {encryptedText&&<p>Encrypted text: {encryptedText}</p>}
           {decrypted&&<p>Decrypted: {decrypted}</p>}
           {decryptedText&&<p>Decrypted text: {decryptedText}</p>}
         </div>
