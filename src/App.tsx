@@ -43,16 +43,12 @@ function App() {
   const [mode, setMode] = useState('encrypt')
   const [text, setText] = useState('')
   const [key, setKey] = useState('')
-  const [binaryInput, setBinarInput] = useState('')
-  const [padded, setPadded] = useState('')
-  const [encrypted, setEncrypted] = useState('')
-  const [decrypted, setDecrypted] = useState('')
-  const [decryptedText, setdecryptedText] = useState('')
+  const [result, setResult] = useState({})
 
 const handleOperation = ()=>{
   const des = new DES(key);
   const obj = testDES(des, text)
-
+  setResult(obj)
 }
 
   return (
@@ -100,7 +96,16 @@ const handleOperation = ()=>{
         <button onClick={handleOperation} style={{ marginTop: '10px' }}>
           {mode === 'encrypt' ? 'Encrypt' : 'Decrypt'}
         </button>
-
+        {Object.keys(result).length && 
+        <div>
+          <h3>Results: </h3>
+          {result.binaryInput&&<p>Text in binary: {result.binaryInput}</p>}
+          {result.padded&&<p>Text in binary: {result.padded}</p>}
+          {result.encrypted&&<p>Text in binary: {result.encrypted}</p>}
+          {result.decrypted&&<p>Text in binary: {result.decrypted}</p>}
+          {result.decryptedText&&<p>Text in binary: {result.decryptedText}</p>}
+        </div>
+        }
       </div>
     </>
   )
