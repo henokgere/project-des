@@ -63,7 +63,7 @@ const handleOperation = ()=>{
   return (
     <>
       <div style={{ padding: '20px' }}>
-        <h2 style={{textAlign: 'center'}}>Simple Encryption/Decryption (DES-Like)</h2>
+        <h2 style={{textAlign: 'center'}}>ቀሊል ምስጢራዊ/ምፍታሕ (DES-1-key)</h2>
         <div>
           <label>
             <input
@@ -105,8 +105,13 @@ const handleOperation = ()=>{
         <button onClick={handleOperation} style={{ marginTop: '10px', textAlign: 'center'}}>
           {mode === 'encrypt' ? 'Encrypt' : 'Decrypt'}
         </button>
+        <div className="loader">
+            <svg width="100" height="100" viewBox="0 0 100 100">
+                <circle className="circle" cx="50" cy="50" r="40"></circle>
+            </svg>
+        </div>
         <div>
-          <h3>Results: </h3>
+          <h3>ውፅኢታት: </h3>
           {binaryInput&&<p>Text in binary: {binaryInput}</p>}
           {padded&&<p>Text in binary: {padded}</p>}
           {encrypted&&<p>Text in binary: {encrypted}</p>}
