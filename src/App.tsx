@@ -3,7 +3,7 @@ import { DES } from './des';
 
 import './App.css'
 
-function testDES(des: DES, input: string) {
+function testEncryptDES(des: DES, input: string) {
   const plaintext = stringToBinary(input);
   const paddedPlaintext = DES.padInput(plaintext);
 
@@ -20,7 +20,24 @@ function testDES(des: DES, input: string) {
 
   return { 'binaryInput': plaintext, 'padded': paddedPlaintext, 'encrypted': encrypted, 'encryptedText': binaryToString(DES.unpadInput(encrypted)), 'decrypted': decrypted, 'decryptedText': binaryToString(DES.unpadInput(decrypted))}
 }
+function testDecryptDES(des: DES, input: string) {
+  const plaintext = stringToBinary(input);
+  const paddedPlaintext = DES.padInput(plaintext);
 
+  console.log('Original: ' + input);
+  console.log('Binary Input: ', plaintext);
+  console.log('Padded: ' + paddedPlaintext);
+
+  const decrypted = des.decrypt(paddedPlaintext);
+  console.log('Decrypted: ' + decrypted);
+  console.log('Decrypted (text): ' + binaryToString(DES.unpadInput(decrypted)));
+
+  const encrypted = des.encrypt(decrypted);
+  console.log('Encrypted: ' + encrypted);
+
+
+  return { 'binaryInput': plaintext, 'padded': paddedPlaintext, 'encrypted': encrypted, 'encryptedText': binaryToString(DES.unpadInput(encrypted)), 'decrypted': decrypted, 'decryptedText': binaryToString(DES.unpadInput(decrypted))}
+}
 function stringToBinary(str: string): string {
   return str
     .split('')
@@ -54,7 +71,11 @@ function App() {
 
 const handleOperation = ()=>{
   const des = new DES(key);
-  const obj = testDES(des, text)
+  let obj = testEncryptDES(des, text)
+  if(mode == 'decrypt'){
+    obj = testDecryptDES(des, text)
+  }
+
   setLoading(true)
   setTimeout(()=>{
     setLoading(false)
